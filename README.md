@@ -8,7 +8,7 @@ Touch the correct animal that matches the name shown. Tracks correct and incorre
 
 ## 📸 Screenshots
 
-> *(Insert your images here if needed)*
+<img src="Sources/readme/1.png" alt="Screenshot" width="250"/> <img src="Sources/readme/2.png" alt="Screenshot" width="250"/><img src
 
 ---
 
