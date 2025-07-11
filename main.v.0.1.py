@@ -10,7 +10,7 @@ M5.begin()
 
 # Configuración de pantalla
 lcd = M5.Lcd
-lcd.setRotation(0)  # Vertical: 540x960
+lcd.setRotation(0)  # Vertical
 lcd.clear()
 lcd.setTextColor(0x000000)
 lcd.setTextSize(2)
