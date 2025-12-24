@@ -1,0 +1,25 @@
+# PlatformIO build artifacts and dependencies
+.pio/
+platformio_quiz/.pio/
+
+# Arduino build artifacts
+arduino_quiz/build/
+
+# Binary and compiled files
+*.elf
+*.bin
+*.map
+*.o
+*.a
+*.dblite
+
+# Large font files
+*.c.o
+lgfx_font_*.c
+lgfx_efont_*.c
+
+# Images (optional - remove if you need Claude to see them)
+# Sources/
+
+# Git internal files in dependencies
+**/.git/objects/

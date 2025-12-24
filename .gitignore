@@ -173,3 +173,18 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 .DS_Store
+
+# PlatformIO
+.pio/
+platformio_quiz/.pio/
+
+# Arduino build
+arduino_quiz/build/
+
+# Binaries
+*.elf
+*.bin
+*.map
+
+# Backup files
+*.bak

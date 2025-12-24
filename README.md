@@ -1,125 +1,174 @@
-# 🐾 M5Stack Tab5 Animal Quiz Game – v0.1
+# M5Stack Tab5 Quiz Game - v2.0
 
-An educational, touch-based quiz game for children, designed for the **M5Stack Tab5** using **UIFlow 2.3** (MicroPython).
+An educational, touch-based quiz game for children, designed for the **M5Stack Tab5** (ESP32-P4) using **PlatformIO** with Arduino framework.
 
-Touch the correct animal that matches the name shown. Tracks correct and incorrect answers, shows battery status, and runs fully offline with a colorful background.
+Touch the correct image that matches the name shown. Features multiple quiz categories, TTS audio, score tracking, and runs fully offline.
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 <img src="Sources/readme/1.png" alt="Screenshot" width="250"/> <img src="Sources/readme/2.png" alt="Screenshot" width="250"/>
 
 ---
 
-## 🧪 Version
+## Version
 
-**Current Version: v0.1**
+**Current Version: v2.0**
 
-🆕 First release for **M5Stack Tab5**:
+New in v2.0:
+- Multiple quiz categories: Animals, Fruits, Autumn, MIX
+- Menu screen to select quiz type
+- MIX mode combines all 82 items
+- TTS audio for each item name
+- Splash screen on startup
+- PlatformIO/Arduino framework (was MicroPython)
+- SD card for images and audio
 
+v0.1 features retained:
 - Full-screen vertical layout (720x1280)
-- Large animal images
-- Transparent-style text over background
+- Large images (340x340)
 - Touch input for 3 options
 - Battery, score, and fail indicators
 
 ---
 
-## 🖼️ Features
+## Features
 
-- Touchscreen-based animal guessing game
-- 3 large images shown vertically
+- 4 quiz categories (82 total items):
+  - Animals (46 items)
+  - Fruits (16 items)
+  - Autumn objects (20 items)
+  - MIX (all combined)
+- Touchscreen-based guessing game
+- TTS audio pronunciation
 - Colorful illustrated background
 - Battery level display
-- Score tracking (✅ correct / ❌ wrong)
-- All files run from `/flash`
+- Score tracking (correct / wrong)
 - Works completely offline
 
 ---
 
-## 🧠 How it works
+## How it works
 
-1. The game shows a random animal name.
-2. The child taps one of the three animal images.
-3. If correct, it displays “Correct!” and loads a new challenge.
-4. If wrong, it shows “Try again” and allows a second chance.
-5. Battery level, score, and fails are always visible.
+1. Select a quiz category from the menu.
+2. The game shows a random item name and plays audio.
+3. The child taps one of the three images.
+4. If correct, it displays "CORRECT!" and loads a new challenge.
+5. If wrong, it shows "Try again" and allows another chance.
+6. Press BACK to return to menu.
 
 ---
 
-## 📂 File Structure
+## File Structure
 
+### Project (PlatformIO)
 ```
-/flash/
-├── Bear.png
-├── Elephant.png
-├── background.png
-├── splash.png
-├── ...
-└── main.v.0.1.py
+platformio_quiz/
+├── src/
+│   └── main.cpp
+├── platformio.ini
+└── ...
+```
+
+### SD Card
+```
+/sdcard/
+├── splash/
+│   ├── splash.png
+│   └── background.png
+├── images/
+│   ├── animals/     (46 PNG files)
+│   ├── fruits/      (16 PNG files)
+│   └── autumn/      (20 PNG files)
+└── audio/
+    ├── animals/     (46 WAV files)
+    ├── fruits/      (16 WAV files)
+    ├── autumn/      (20 WAV files)
+    ├── Correct.wav
+    └── TryAgain.wav
 ```
 
 ---
 
-## 🔧 Requirements
+## Requirements
 
-- **M5Stack Tab5** with **UIFlow 2.3 firmware**
-- MicroPython v1.25 or later
-- PNG images preloaded in `/flash`
-
----
-
-## 📥 Installation
-
-### ✅ Method 1: M5Burner (Recommended)
-
-The game is already available as firmware via **M5Burner**:
-
-1. Open **M5Burner** on your computer.  
-2. Select `tab5-animal-quiz` from the firmware list.  
-3. Connect your **M5Stack Tab5** via USB.  
-4. Click **Burn** to flash the firmware.  
-5. The game will start automatically.
-
-> 💡 No need to upload code or images manually — everything is embedded.
-
-### 🛠 Method 2: Manual Upload
-
-1. Upload `main.v.0.1.py` to `/flash/`  
-2. Upload all PNG images (animals, background, splash) to `/flash/`  
-3. Run the script
+- **M5Stack Tab5** (ESP32-P4)
+- **PlatformIO** with pioarduino platform
+- SD card with images and audio files
 
 ---
 
-## 👶 Perfect For
+## Installation
 
-- Toddlers aged 2–6
+### Step 1: Flash the firmware
+
+```bash
+# Clone the repository
+git clone https://github.com/samucarre/m5tab5-animal-quiz.git
+cd m5tab5-animal-quiz/platformio_quiz
+
+# Build
+pio run
+
+# Put Tab5 in download mode:
+# Hold Reset button until green LED flashes rapidly, then release
+
+# Upload
+pio run -t upload
+```
+
+### Step 2: Prepare SD card
+
+1. Format SD card as FAT32
+2. Copy contents of `Sources/` to SD card root:
+   - `splash/` folder
+   - `images/` folder (with animals, fruits, autumn subfolders)
+   - `audio/` folder (with animals, fruits, autumn subfolders)
+3. Insert SD card into Tab5
+
+### PlatformIO configuration (platformio.ini)
+
+```ini
+[env:m5tab5]
+platform = https://github.com/pioarduino/platform-espressif32.git#54.03.21
+framework = arduino
+board = esp32-p4-evboard
+board_build.mcu = esp32p4
+board_build.flash_mode = qio
+upload_speed = 1500000
+monitor_speed = 115200
+
+build_flags =
+    -DBOARD_HAS_PSRAM
+    -DARDUINO_USB_CDC_ON_BOOT=1
+    -DARDUINO_USB_MODE=1
+
+lib_deps =
+    https://github.com/M5Stack/M5Unified.git
+    https://github.com/M5Stack/M5GFX.git
+```
+
+---
+
+## Perfect For
+
+- Toddlers aged 2-6
 - Montessori-style activities
-- Vocabulary learning (animals in English)
+- Vocabulary learning (English)
 - Offline educational interaction
 
 ---
 
-## 🚧 Future Plans & Collaboration
+## Future Plans
 
-This is just the beginning!
-
-Planned features:
-
-- More animals and categories (jungle, sea, farm…)
-- Sound-based or silhouette quizzes
-- “Learn mode” before quiz
-- Multi-language support
+- More categories (vehicles, shapes, colors...)
+- Multiple language support
+- Learn mode before quiz
 - Animated feedback
-
-Want to help? ✨  
-Contribute with images, ideas, translations or testing!
-
-📧 **samuelcarre@mac.com**
 
 ---
 
-## 📄 License
+## License
 
-MIT License — free to use, learn, modify, and share.
+MIT License - free to use, learn, modify, and share.
