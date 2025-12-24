@@ -485,12 +485,6 @@ void showSplash() {
             file.close();
             M5.Display.drawPng(buf, size, 0, 0);
             free(buf);
-
-            // Mostrar version
-            M5.Display.setTextColor(TFT_WHITE);
-            M5.Display.setTextSize(3);
-            M5.Display.setCursor(300, 1200);
-            M5.Display.print("v2.0");
             return;
         }
         file.close();
@@ -500,10 +494,12 @@ void showSplash() {
     M5.Display.fillScreen(TFT_NAVY);
     M5.Display.setTextColor(TFT_WHITE);
     M5.Display.setTextSize(6);
-    M5.Display.setCursor(200, 500);
+    M5.Display.setCursor(150, 500);
+    M5.Display.print("ANIMAL");
+    M5.Display.setCursor(200, 580);
     M5.Display.print("QUIZ");
     M5.Display.setTextSize(3);
-    M5.Display.setCursor(250, 600);
+    M5.Display.setCursor(250, 700);
     M5.Display.print("v2.0");
 }
 
