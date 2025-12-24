@@ -486,10 +486,10 @@ void showSplash() {
             M5.Display.drawPng(buf, size, 0, 0);
             free(buf);
 
-            // Mostrar version
-            M5.Display.setTextColor(TFT_DARKGREEN);
+            // Mostrar version abajo
+            M5.Display.setTextColor(TFT_WHITE);
             M5.Display.setTextSize(3);
-            M5.Display.setCursor(310, 1050);
+            M5.Display.setCursor(300, 1200);
             M5.Display.print("v2.0");
             return;
         }
